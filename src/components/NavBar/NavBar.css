@@ -1,0 +1,19 @@
+.navbar-nav {
+  padding: 20px 30px 20px 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* background-color: #ccddff; */
+  background-color: #f7f4e9;
+}
+.navbar-nav .navbar-links {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #b34700;
+}
+a.nav-link {
+  padding: 0px 40px 10px 10px;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,20 @@
+.list-teaser {
+  font-size: 2rem;
+  padding: 0px 30px 10px 10px;
+  font-weight: bold;
+}
+.extra-navs {
+  font-size: 1rem;
+  padding: 10px 30px 10px 10px;
+}
+.baby-names {
+  padding: 10px 30px 10px 10px;
+  text-transform: capitalize
+}
+.baby-name {
+  padding-bottom: 3px;
+  padding-bottom: 1px;
+  color: #ccddff;
+  font-family: 'Patrick Hand SC';
+  font-size: 1.4rem;
+}

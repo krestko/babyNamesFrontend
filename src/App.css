@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC');
+
+.App {
+  text-align: center;
+  font-family: 'Courier';
+}
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+a {
+  font-family: 'Courier';
+  color: #b34700;
+  text-decoration: none;
+}
+a:hover { 
+  transition: 0.2s ease;
+  color: #80aaff; 
+}
+h1 {
+  color:#80aaff;
+}
+h5, h6 {
+  color: #ff944d;
+  margin-bottom: 5px;
+}
