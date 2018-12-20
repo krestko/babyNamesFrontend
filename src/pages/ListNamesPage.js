@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import NamesAPI from '../api/NamesAPI';
 import ListsAPI from '../api/ListsAPI';
 import UsersAPI from '../api/UsersAPI';
 import '../App.css';
@@ -8,16 +7,11 @@ import './ListNamesPage.css'
 
 class ListNamesPage extends Component {
   state = {
-    names: null,
     list_teaser: null,
     lists: null
   }
 
   componentDidMount() {
-    NamesAPI.fetchNamesByListID(this.props.match.params.listID)
-    .then(json => this.setState({
-      names: json
-    }))
     UsersAPI.fetchUserByID(this.props.match.params.userID)
     .then((json) => ListsAPI.fetchListByID(json.recently_viewed_list))
     .then(json => this.setState({
