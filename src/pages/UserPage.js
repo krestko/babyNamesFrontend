@@ -29,14 +29,14 @@ class UserPage extends Component {
   checkListName = () => {
     let counter = 0;
     while(counter < this.state.lists.length) {
-      if(this.state.lists[counter].list_name === this.state.list_name.trim()) {
+      if(this.state.lists[counter].list_name === this.state.list_name) {
         this.setState({ 
           list_name: '',
           redirect: false
         })
         break;
       } else if(counter === this.state.lists.length - 1) {
-        ListsAPI.addList({list_name: this.state.list_name.trim()})
+        ListsAPI.addList({list_name: this.state.list_name})
         .then(() => ListsAPI.fetchLists())
         .then(json => 
           this.setState({
