@@ -29,14 +29,14 @@ class UserPage extends Component {
   checkListName = () => {
     let counter = 0;
     while(counter < this.state.lists.length) {
-      if(this.state.lists[counter].list_name === this.state.list_name) {
+      if(this.state.lists[counter].list_name === this.state.list_name.trim()) {
         this.setState({ 
           list_name: '',
           redirect: false
         })
         break;
       } else if(counter === this.state.lists.length - 1) {
-        ListsAPI.addList({list_name: this.state.list_name})
+        ListsAPI.addList({list_name: this.state.list_name.trim()})
         .then(() => ListsAPI.fetchLists())
         .then(json => 
           this.setState({
@@ -66,7 +66,7 @@ class UserPage extends Component {
   listNameParams = () => {
     return (
       <div>
-        <h6>List name must be at least 12 characters long and contain at least one letter and one number.</h6>
+        <h6>List name must be at least 12 characters long and contain at least one letter and one number. **Do not include spaces in list name**</h6>
       </div>
     )
   }
