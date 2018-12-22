@@ -11,31 +11,30 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    ListsAPI.fetchLists()
-    .then((json) => NamesAPI.fetchNamesByListID(json[this.state.rand].id))
+    NamesAPI.fetchNamesByListID(this.state.rand)
     .then(json => this.setState({
       names: json
     }))
   }
 
-  listNames = () => {
-    return this.state.names.map((name, index) => {
-      if(index <= 6) {
-        return (
-          <div key={index} className='nav-link'>
-            {name.baby_name}
-          </div>
-        )
-      }
-    })
-  }
+  // listNames = () => {
+  //   return this.state.names.map((name, index) => {
+  //     if(index <= 6) {
+  //       return (
+  //         <div key={index} className='nav-link'>
+  //           {name.baby_name}
+  //         </div>
+  //       )
+  //     }
+  //   })
+  // }
 
   render() {
     console.log(this.state.rand)
     return (
       <nav className='navbar-nav'>
         <div className='navbar-links'>
-          { this.state.names !== null && this.state.names.length > 1 ? this.listNames(): null }
+          {/* { this.state.names !== null ? this.listNames(): null } */}
         </div>
       </nav>
     );
