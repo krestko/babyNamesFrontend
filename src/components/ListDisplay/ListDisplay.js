@@ -21,9 +21,9 @@ class ListNamesPage extends Component {
     if(this.state.list) {
       return (
         <div className='App'>
-          <h1>*{this.state.list.list_name}*</h1>
+          <h1>List:</h1>
           <div>
-            { this.state.list ? <NameForm list={this.state.list} />: null }
+            <NameForm list={this.state.list} />
           </div>
         </div>
       )
