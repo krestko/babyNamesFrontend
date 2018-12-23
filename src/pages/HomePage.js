@@ -1,66 +1,50 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import UsersAPI from '../api/UsersAPI';
+import ListsAPI from '../api/ListsAPI';
 import '../App.css';
 import './ListNamesPage.css'
 
 class HomePage extends Component {
   state = {
-    users: null,
-    user_name: '',
-    user: null,
-    redirect: null
+    lists: null
   }
 
   componentDidMount() {
-    UsersAPI.fetchUsers()
-    .then(json => this.setState({
-      users: json
-    }))
+    ListsAPI.fetchLists()
+    .then(json => this.setState({ lists: json }))
   }
 
-  checkName = () => {
-      let counter = 0;
-      while(counter < this.state.users.length) {
-        if(this.state.users[counter].user_name === this.state.user_name) {
-          this.setState({
-            user: this.state.users[counter], 
-            redirect: true 
-          });
-          break;
-        } else if(counter === this.state.users.length - 1) {
-          this.setState({
-            user_name: '',
-            redirect: false
-          })
+  listGenerator = (listID = 0) => {
+    if(listID !== 0) {
+      return this.state.lists.map((list, index) => {
+        if(list === listID) {
+          return this.listGenerator();
+        } else if(index === this.state.lists.length - 1) {
+          ListsAPI.addList({list_name: listID});
+          return <Redirect key={index} to={`/${listID}`} />
         }
-        counter++;
+      })
+    } else {
+      let listID = '';
+      const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+      let counter = 6;
+      while(counter > 0) {
+        listID += nums[Math.floor(Math.random() * nums.length)];
+        listID += letters[Math.floor(Math.random() * letters.length)];
+        counter--;
       }
+      return this.listGenerator(listID);
     }
+  } 
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.checkName();
-  }
-
-  handleUserName = (e) => {
-    this.setState({user_name: e.target.value});
-  }
-    
   render() {
-    if(this.state.redirect) {
-      return <Redirect to={`/babynames/${this.state.user.id}`} />
+    if(this.state.lists) {
+      return this.listGenerator()
     }
-
     return (
       <div>
-        <form>
-          <h1>Welcome!</h1>
-          { this.state.redirect === false ? <h6>Invalid User Name</h6>: null }
-          <input type='text' value={this.state.user_name} onChange={this.handleUserName} />
-          <button type="button" onClick={this.handleSubmit}>Submit</button>
-          <h5>Please enter user name</h5>
-        </form>
       </div>
     )
   }

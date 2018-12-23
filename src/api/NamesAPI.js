@@ -17,7 +17,19 @@ const addListName = (listID, nameObject) => {
   .catch(error => console.log(error))
 }
 
+const updateName = (listID, nameID, nameObject) => {
+  return fetch(`http://localhost:3001/api/v1/lists/${listID}/names/${nameID}`, {
+    headers: {'content-type': 'application/json'},
+    method: "PATCH",
+    mode: "cors",
+    body: JSON.stringify(nameObject)
+  })
+  .then((response) => response.json())
+  .catch(error => console.log(error))
+}
+
 export default {
   fetchNamesByListID: fetchNamesByListID,
-  addListName: addListName
+  addListName: addListName,
+  updateName: updateName
 }
