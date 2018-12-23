@@ -6,7 +6,9 @@ import './ListNamesPage.css'
 
 class HomePage extends Component {
   state = {
-    lists: null
+    lists: null,
+    list: null,
+    redirect: null
   }
 
   componentDidMount() {
@@ -20,8 +22,13 @@ class HomePage extends Component {
         if(list === listID) {
           return this.listGenerator();
         } else if(index === this.state.lists.length - 1) {
-          ListsAPI.addList({list_name: listID});
-          return <Redirect key={index} to={`/${listID}`} />
+          ListsAPI.addList({list_name: listID})
+          .then(() => ListsAPI.fetchLists())
+          .then(json => this.setState({ 
+            lists: json,
+            list: listID,
+            redirect: true 
+          }))
         }
       })
     } else {
@@ -40,11 +47,12 @@ class HomePage extends Component {
   } 
 
   render() {
-    if(this.state.lists) {
-      return this.listGenerator()
+    if(this.state.redirect) {
+      return <Redirect to={`/${this.state.list}`} />
     }
     return (
       <div>
+        { this.state.lists ? this.listGenerator(): null }
       </div>
     )
   }
