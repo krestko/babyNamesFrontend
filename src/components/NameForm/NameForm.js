@@ -20,6 +20,7 @@ class NameForm extends Component {
   }
 
   handleNameSave = () => {
+    console.log('handle name save initiated')
     NamesAPI.addListName(this.props.list.id, {baby_name: this.state.baby_name, crossed_out: 'false'})
     .then(() => NamesAPI.fetchNamesByListID(this.props.list.id))
     .then(json => {
@@ -34,6 +35,7 @@ class NameForm extends Component {
   }
 
   checkBabyName = () => {
+    console.log('check name initiated')
     if(this.state.names.length === 0) {
       this.handleNameSave();
     } else {
@@ -59,7 +61,9 @@ class NameForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('submit action occured', this.state.baby_name)
     if(/[0-9]+/gi.test(this.state.baby_name) === true) {
+    console.log('should be false:', /[0-9]+/gi.test(this.state.baby_name))
       return this.setState({
         baby_name: '',
         name_params: false
