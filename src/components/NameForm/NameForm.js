@@ -28,7 +28,9 @@ class NameForm extends Component {
         baby_name: '',
         redirect: null,
         name_params: null,
-    })})
+    })
+  console.log(json)
+  })
   }
 
   checkBabyName = () => {
